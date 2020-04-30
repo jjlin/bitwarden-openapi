@@ -1,0 +1,14 @@
+ResponseModel:
+  type: object
+  description: >
+    Base model for API responses. Almost all API responses inherit from this
+    model, setting the `Object` property to a response-specific type tag.
+  discriminator:
+    propertyName: Object
+  properties:
+    Object:
+      type: string
+      readOnly: true
+      description: Object type tag.
+  required:
+    - Object

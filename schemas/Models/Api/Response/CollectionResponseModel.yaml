@@ -1,0 +1,67 @@
+CollectionResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Organization collection model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`collection`).
+        Id:
+          description: Collection UUID
+          type: string
+          format: uuid
+        OrganizationId:
+          description: Organization UUID
+          type: string
+          format: uuid
+        Name:
+          description: Collection name
+          type: string
+        ExternalId:
+          description: Collection external ID
+          type: string
+          nullable: true
+      required:
+        - Object
+        - Id
+        - OrganizationId
+        - Name
+
+CollectionDetailsResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/CollectionResponseModel'
+    - description: Organization collection details model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`collectionDetails`).
+        ReadOnly:
+          description: >
+            Whether entries in the collection are read-only to the user
+          type: boolean
+        HidePasswords:
+          description: >
+            Whether the password field of entries in the collection are
+            hidden to the user
+          type: boolean
+      required:
+        - Object
+        - ReadOnly
+        - HidePasswords
+
+CollectionGroupDetailsResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/CollectionResponseModel'
+    - description: Organization collection details model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`collectionGroupDetails`).
+        Groups:
+          description: Collection groups ???
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectionReadOnlyResponseModel'
+      required:
+        - Object
+        - Groups

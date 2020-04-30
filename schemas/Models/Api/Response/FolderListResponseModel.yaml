@@ -1,0 +1,13 @@
+FolderListResponseModel:
+  description: Paginated folder list response model.
+  allOf:
+    - $ref: '#/components/schemas/ListResponseModel'
+    - type: object
+      properties:
+        Data:
+          description: The list of folders.
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderResponseModel'
+      required:
+        - Data

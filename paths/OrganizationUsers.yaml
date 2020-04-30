@@ -1,0 +1,361 @@
+/organizations/{orgId}/users:
+  get:
+    tags:
+      - Organization Users
+    summary: Get users in an organization
+    description: Get a list of all users in an organization.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationUserUserDetailsResponseModel' #XXX ListResponse
+
+/organizations/{orgId}/users/{id}:
+  get:
+    tags:
+      - Organization Users
+    summary: Get a user in an organization
+    description: Get a user in an organization.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationUserDetailsResponseModel' #TODO
+
+/organizations/{orgId}/users/{id}/groups:
+  get:
+    tags:
+      - Organization Users
+    summary: Get the groups that a user belongs to
+    description: Get the UUIDs of the groups that a user belongs to
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+
+/organizations/{orgId}/invite:
+  post:
+    tags:
+      - Organization Users
+    summary: Invite a user to an organization
+    description: Invite a user to an organization.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationUserInviteRequestModel' #TODO
+    responses:
+      '200':
+        description: Success
+
+/organizations/{orgId}/{id}/reinvite:
+  post:
+    tags:
+      - Organization Users
+    summary: Reinvite a user to an organization
+    description: Reinvite a user to an organization.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+
+/organizations/{orgId}/{id}/accept:
+  post:
+    tags:
+      - Organization Users
+    summary: Accept an invitation to an organization
+    description: Accept an invitation to an organization.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationUserAcceptRequestModel' #TODO
+    responses:
+      '200':
+        description: Success
+
+/organizations/{orgId}/{id}/confirm:
+  post:
+    tags:
+      - Organization Users
+    summary: Confirm a user's acceptance of an invitation
+    description: Confirm a user's acceptance of an invitation.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationUserConfirmRequestModel' #TODO
+    responses:
+      '200':
+        description: Success
+
+/organizations/{orgId}/{id}:
+  post:
+    tags:
+      - Organization Users
+    summary: Update a user's organization access
+    description: Update a user's organization access.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationUserUpdateRequestModel' #TODO
+    responses:
+      '200':
+        description: Success
+  put:
+    tags:
+      - Organization Users
+    summary: Update a user's organization access
+    description: Update a user's organization access.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationUserUpdateRequestModel' #TODO
+    responses:
+      '200':
+        description: Success
+  delete:
+    tags:
+      - Organization Users
+    summary: Delete a user from an organization
+    description: Delete a user from an organization.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+
+/organizations/{orgId}/{id}/delete:
+  post:
+    tags:
+      - Organization Users
+    summary: Delete a user from an organization
+    description: Delete a user from an organization.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+
+/organizations/{orgId}/{id}/groups:
+  post:
+    tags:
+      - Organization Users
+    summary: Update a user's group memberships
+    description: Update a user's group memberships.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationUserUpdateGroupsRequestModel' #TODO
+    responses:
+      '200':
+        description: Success
+  put:
+    tags:
+      - Organization Users
+    summary: Update a user's group memberships
+    description: Update a user's group memberships.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationUserUpdateGroupsRequestModel' #TODO
+    responses:
+      '200':
+        description: Success

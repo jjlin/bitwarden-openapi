@@ -1,0 +1,10 @@
+$include: Accounts.yaml
+$include: Ciphers.yaml
+$include: Collections.yaml
+$include: Devices.yaml
+$include: Folders.yaml
+$include: Notifications.yaml
+$include: OrganizationUsers.yaml
+$include: Settings.yaml
+$include: Sync.yaml
+$include: Users.yaml

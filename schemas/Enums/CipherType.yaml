@@ -1,0 +1,14 @@
+CipherType:
+  description: |
+    Cipher type:
+      * `0` - Folder (deprecated)
+      * `1` - Login
+      * `2` - SecureNote
+      * `3` - Card
+      * `4` - Identity
+  type: integer
+  enum:
+    - 1
+    - 2
+    - 3
+    - 4

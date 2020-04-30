@@ -1,0 +1,159 @@
+CipherRequestModel:
+  description: Request model for creating or updating a folder.
+  type: object
+  properties:
+    Type:
+      $ref: '#/components/schemas/CipherType'
+    OrganizationId:
+      type: string
+    FolderId:
+      type: string
+    Favorite:
+      type: boolean
+    Name:
+      description: Encrypted name (in CipherString format).
+      type: string
+      format: cipher
+    Notes:
+      description: Cipher notes
+      type: string
+    Fields:
+      description: List of custom fields (possibly empty)
+      type: array
+      items:
+        $ref: '#/components/schemas/CipherFieldModel'
+    PasswordHistory:
+      description: List of previous passwords (possibly empty)
+      type: array
+      items:
+        $ref: '#/components/schemas/CipherPasswordHistoryModel'
+    Attachments:
+      description: (Obsolete) ???
+      type: object
+      additionalProperties:
+        type: string
+    Attachments2:
+      description: ???
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/CipherAttachmentModel'
+    Login:
+      $ref: '#/components/schemas/CipherLoginModel'
+    Card:
+      $ref: '#/components/schemas/CipherCardModel'
+    Identity:
+      $ref: '#/components/schemas/CipherIdentityModel'
+    SecureNote:
+      $ref: '#/components/schemas/CipherSecureNoteModel'
+  required:
+    - Type
+
+CipherWithIdRequestModel:
+  allOf:
+    - $ref: '#/components/schemas/CipherRequestModel'
+    - description: >
+        Request model for creating or updating a cipher, with the cipher UUID
+        included in the request.
+      type: object
+      properties:
+        Id:
+          description: Cipher UUID
+          type: string
+          format: uuid
+      required:
+        - Id
+
+CipherCreateRequestModel:
+  description: Request model for creating a cipher.
+  type: object
+  properties:
+    CollectionIds:
+      type: array
+      items:
+        type: string
+        format: uuid
+    Cipher:
+      $ref: '#/components/schemas/CipherRequestModel'
+  required:
+    - Cipher
+
+CipherShareRequestModel:
+  description: Request model for creating a cipher.
+  type: object
+  properties:
+    CollectionIds:
+      type: array
+      items:
+        type: string
+        format: uuid
+    Cipher:
+      $ref: '#/components/schemas/CipherRequestModel'
+  required:
+    - Cipher
+
+CipherCollectionsRequestModel:
+  description: Request model for ???.
+  type: object
+  properties:
+    CollectionIds:
+      type: array
+      items:
+        type: string
+        format: uuid
+  required:
+    - CollectionIds
+
+CipherBulkDeleteRequestModel:
+  description: Request model for ???.
+  type: object
+  properties:
+    Ids:
+      type: array
+      items:
+        type: string
+        format: uuid
+  required:
+    - Ids
+
+CipherBulkRestoreRequestModel:
+  description: Request model for ???.
+  type: object
+  properties:
+    Ids:
+      type: array
+      items:
+        type: string
+        format: uuid
+  required:
+    - Ids
+
+CipherBulkMoveRequestModel:
+  description: Request model for ???.
+  type: object
+  properties:
+    Ids:
+      type: array
+      items:
+        type: string
+        format: uuid
+    FolderId:
+      type: string
+  required:
+    - Ids
+
+CipherBulkShareRequestModel:
+  description: Request model for creating a cipher.
+  type: object
+  properties:
+    CollectionIds:
+      type: array
+      items:
+        type: string
+        format: uuid
+    Ciphers:
+      type: array
+      items:
+        $ref: '#/components/schemas/CipherWithIdRequestModel'
+  required:
+    - CollectionIds
+    - Ciphers

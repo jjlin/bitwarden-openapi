@@ -1,0 +1,17 @@
+PushUpdateRequestModel:
+  description: Request model for updating a push notification registration.
+  type: object
+  properties:
+    DeviceIds:
+      description: List of device UUIDs that are associated with an organization.
+      type: array
+      items:
+        type: string
+        format: uuid
+    OrganizationId:
+      description: UUID of the organization.
+      type: string
+      format: uuid
+  required:
+    - DeviceIds
+    - OrganizationId

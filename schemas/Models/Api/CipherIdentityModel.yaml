@@ -1,0 +1,76 @@
+CipherIdentityModel:
+  description: Identity cipher model
+  type: object
+  properties:
+    Title:
+      description: Encrypted title
+      type: string
+      nullable: true
+    FirstName:
+      description: Encrypted first name
+      type: string
+      nullable: true
+    MiddleName:
+      description: Encrypted middle name
+      type: string
+      nullable: true
+    LastName:
+      description: Encrypted last name
+      type: string
+      nullable: true
+    Address1:
+      description: Encrypted address (line 1)
+      type: string
+      nullable: true
+    Address2:
+      description: Encrypted address (line 2)
+      type: string
+      nullable: true
+    Address3:
+      description: Encrypted address (line 3)
+      type: string
+      nullable: true
+    City:
+      description: Encrypted city
+      type: string
+      nullable: true
+    State:
+      description: Encrypted state
+      type: string
+      nullable: true
+    PostalCode:
+      description: Encrypted postal code
+      type: string
+      nullable: true
+    Country:
+      description: Encrypted country name
+      type: string
+      nullable: true
+    Company:
+      description: Encrypted company name
+      type: string
+      nullable: true
+    Email:
+      description: Encrypted email address
+      type: string
+      nullable: true
+    Phone:
+      description: Encrypted phone number
+      type: string
+      nullable: true
+    SSN:
+      description: Encrypted [Social Security Number](https://en.wikipedia.org/wiki/Social_Security_number)
+      type: string
+      nullable: true
+    Username:
+      description: Encrypted username
+      type: string
+      nullable: true
+    PassportNumber:
+      description: Encrypted passport number
+      type: string
+      nullable: true
+    LicenseNumber:
+      description: Encrypted license number (e.g., driver's license)
+      type: string
+      nullable: true

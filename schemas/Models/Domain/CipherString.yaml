@@ -1,0 +1,12 @@
+# https://github.com/bitwarden/mobile/blob/master/src/Core/Models/Domain/CipherString.cs
+CipherString:
+  type: string
+  description: |
+    The encrypted string format used in Bitwarden ciphers.
+    The basic format is `<EncryptionType>.<CipherText>[|<IV>][|<MAC?]`.
+
+    `<EncryptionType>` and `<CipherText>` (the actual encrypted data) are
+    always present, while the presence of the `<IV>` and `<MAC>` fields
+    depends on the `<EncryptionType>`.
+
+    `<EncryptionType>`

@@ -1,0 +1,47 @@
+DomainsResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Equivalent domains model.
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`domains`).
+        EquivalentDomains:
+          description: >
+            List of user-defined equivalent domain entries. Each entry
+            is a list of domains that share the same user credentials
+            (e.g., `amazon.com` and `amazon.co.uk`).
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        GlobalEquivalentDomains:
+          description: >
+            List of global (Bitwarden-defined) equivalent domain entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalDomains'
+      required:
+        - Object
+        - EquivalentDomains
+        - GlobalEquivalentDomains
+
+GlobalDomains:
+  description: Equivalent domains model.
+  type: object
+  properties:
+    Type:
+      $ref: '#/components/schemas/GlobalEquivalentDomainsType'
+    Domains:
+      description: List of equivalent domains for this entry.
+      type: array
+      items:
+        type: string
+    Excluded:
+      description: Whether the user has marked this entry as excluded (disabled).
+      type: boolean
+  required:
+    - Type
+    - Domains
+    - Excluded

@@ -1,0 +1,20 @@
+Forbidden:
+  description: This user is forbidden to access this resource.
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/ErrorResponse'
+
+Unauthorized:
+  description: This user is not authorized to access this resource.
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/ErrorResponse'
+
+default:
+  description: Unexpected error
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/ErrorResponse'

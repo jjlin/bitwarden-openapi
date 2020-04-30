@@ -1,0 +1,16 @@
+CipherFieldModel:
+  description: Custom field model
+  type: object
+  properties:
+    Type:
+      $ref: '#/components/schemas/FieldType'
+    Name:
+      description: Encrypted custom field name
+      type: string
+    Value:
+      description: Encrypted custom field value
+      type: string
+  required:
+    - Type
+    - Name
+    - Value

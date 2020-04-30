@@ -1,0 +1,25 @@
+FolderResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Folder model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`folder`).
+        Id:
+          description: Folder UUID
+          type: string
+          format: uuid
+        Name:
+          description: Folder name (as a CipherString)
+          type: string
+          format: cipher
+        RevisionDate:
+          description: Folder revision date-time (RFC 3339)
+          type: string
+          format: date-time
+      required:
+        - Object
+        - Id
+        - Name
+        - RevisionDate

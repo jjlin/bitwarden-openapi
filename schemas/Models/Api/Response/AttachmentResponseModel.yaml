@@ -1,0 +1,36 @@
+AttachmentResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: File attachment model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`attachment`).
+        Id:
+          description: Attachment UUID
+          type: string
+          format: uuid
+        Url:
+          description: URL of the encrypted attachment blob
+          type: string
+          format: uri
+        Filename:
+          description: Filename of the attachment
+          type: string
+        Key:
+          description: ???
+          type: string
+        Size:
+          description: File size of the attachment (in bytes)
+          type: string
+        SizeName:
+          description: A human-readable representation of the file size (4.2 KB, 1.43 GB, etc.)
+          type: string
+      required:
+        - Object
+        - Id
+        - Url
+        - Filename
+        - Key
+        - Size
+        - SizeName

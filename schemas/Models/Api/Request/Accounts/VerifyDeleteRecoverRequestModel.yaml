@@ -1,0 +1,13 @@
+VerifyDeleteRecoverRequestModel:
+  description: Account deletion request.
+  type: object
+  properties:
+    UserId:
+      type: string
+      description: User ID of the account to delete.
+    Token:
+      type: string
+      description: Challenge token sent to the email address associated with the account.
+  required:
+    - UserId
+    - Token

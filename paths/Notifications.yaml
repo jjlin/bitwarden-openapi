@@ -1,0 +1,100 @@
+/notifications/hub:
+  get:
+    tags:
+      - Notifications
+    summary: Negotiate WebSocket notifications
+    description: Negotiate WebSocket notifications
+    parameters:
+      - in: query
+        name: access_token
+        description: |
+          JWT auth token. This is passed via the `Authorization` header in
+          other API requests, but Bitwarden implements WebSocket
+          notifications via [SignalR](http://signalr.net), which apparently
+          does things differently.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: id
+        description: Unknown identifier (deprecated)
+        required: false
+        schema:
+          type: string
+    responses:
+      '101':
+        description: Switching Protocols to WebSocket
+
+/push/register:
+  post:
+    tags:
+      - Notifications
+    summary: Register for push notifications
+    description: Register for push notifications
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PushRegistrationRequestModel'
+    responses:
+      '200':
+        description: Success
+
+/push/{id}:
+  delete:
+    tags:
+      - Notifications
+    summary: Delete push notification registration
+    description: Delete push notification registration
+    responses:
+      '200':
+        description: Success
+
+/push/add-organization:
+  put:
+    tags:
+      - Notifications
+    summary: Add organization to push registration
+    description: Add organization to push registration
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PushUpdateRequestModel'
+    responses:
+      '200':
+        description: Success
+
+/push/delete-organization:
+  put:
+    tags:
+      - Notifications
+    summary: Delete organization from push registration
+    description: Delete organization from push registration
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PushUpdateRequestModel'
+    responses:
+      '200':
+        description: Success
+
+/push/send:
+  post:
+    tags:
+      - Notifications
+    summary:
+    description:
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PushUpdateRequestModel'
+    responses:
+      '200':
+        description: Success

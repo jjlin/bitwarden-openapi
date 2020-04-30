@@ -1,0 +1,47 @@
+DeviceType:
+  description: |
+    Device type:
+      * `0` - Android
+      * `1` - iOS
+      * `2` - Chrome Extension
+      * `3` - Firefox Extension
+      * `4` - Opera Extension
+      * `5` - Edge Extension
+      * `6` - Windows Desktop
+      * `7` - macOS Desktop
+      * `8` - Linux Desktop
+      * `9` - Chrome Browser
+      * `10` - Firefox Browser
+      * `11` - Opera Browser
+      * `12` - Edge Browser
+      * `13` - IE Browser
+      * `14` - Unknown Browser
+      * `15` - Amazon FireOS
+      * `16` - Universal Windows Platform (UWP)
+      * `17` - Safari Browser
+      * `18` - Vivaldi Browser
+      * `19` - Vivaldi Extension
+      * `20` - Safari Extension
+  type: integer
+  enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20

@@ -1,0 +1,21 @@
+/users/{uuid}/public-key:
+  get:
+    tags:
+      - Users
+    summary: Get user public key
+    description: Get user public key
+    parameters:
+      - in: path
+        name: uuid
+        description: UUID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200': 
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserKeyResponseModel'

@@ -1,0 +1,23 @@
+/sync:
+  get:
+    tags:
+      - Sync
+    summary: Sync user data
+    description: Sync user data
+    parameters:
+      - in: query
+        name: excludeDomains
+        description: >
+          Whether to omit data for the `Domains` field;
+          if so, the field will be present, but set to `null`.
+        required: false
+        schema:
+          type: boolean
+          default: false
+    responses:
+      '200': 
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncResponseModel'

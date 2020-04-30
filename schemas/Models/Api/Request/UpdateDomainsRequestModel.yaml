@@ -1,0 +1,24 @@
+UpdateDomainsRequestModel:
+  description: Request model for updating the user's equivalent domains settings.
+  type: object
+  properties:
+    EquivalentDomains:
+      description: >
+        List of user-defined equivalent domain entries. Each entry
+        is a list of domains that share the same user credentials
+        (e.g., `amazon.com` and `amazon.co.uk`).
+      type: array
+      items:
+        type: array
+        items:
+          type: string
+    ExcludedGlobalEquivalentDomains:
+      description: >
+        List of global (Bitwarden-defined) equivalent domain entries
+        to exclude (disable).
+      type: array
+      items:
+        $ref: '#/components/schemas/GlobalEquivalentDomainsType'
+  required:
+    - EquivalentDomains
+    - ExcludedGlobalEquivalentDomains

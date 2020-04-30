@@ -1,0 +1,27 @@
+PushRegistrationRequestModel:
+  description: Registration request for push notifications
+  type: object
+  properties:
+    DeviceId:
+      description: UUID of the device to receive push notifications.
+      type: string
+      format: uuid
+    PushToken:
+      description: Push token ???
+      type: string
+      format: byte
+    UserId:
+      description: UUID of the user who owns the device.
+      type: string
+      format: uuid
+    Type:
+      $ref: '#/components/schemas/DeviceType'
+    Identifier:
+      description: ???
+      type: string
+  required:
+    - DeviceId
+    - PushToken
+    - UserId
+    - Type
+    - Identifier

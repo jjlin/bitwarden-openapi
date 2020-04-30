@@ -1,0 +1,49 @@
+# Introductory info:
+#
+# - https://swagger.io/docs/specification/about/
+#
+# Specification:
+#
+# - https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md (official source)
+# - https://swagger.io/specification/ (better-formatted version of the official source)
+#
+openapi: 3.0.3
+info:
+  title: Bitwarden Private API
+  description: |
+    The Bitwarden private APIs. These APIs are unversioned, and can change
+    without notice (occasionally in backward incompatible ways).
+
+    This API model is intended to cover all aspects of the Bitwarden private
+    APIs that may be relevant to a non-commercial third-party implementation
+    of the Bitwarden backend. In particular, it does not cover Bitwarden APIs
+    specific to licensing, billing, payments, etc.
+
+    The Bitwarden private APIs are a moving target; PRs to track changes in
+    the upstream code or to improve the accuracy/completeness of the existing
+    API model are welcome.
+
+    See also:
+
+    * [Bitwarden public APIs](https://bitwarden.com/help/article/public-api/)
+      ([OpenAPI docs](https://docs.bitwarden.com/api/))
+    * [Rubywarden's Bitwarden API overview](https://github.com/jcs/rubywarden/blob/master/API.md)
+
+  version: latest
+  contact:
+    name: GitHub
+    url: https://github.com/jjlin/bitwarden-openapi/
+
+servers:
+  - url: https://api.bitwarden.com/
+
+components:
+  schemas:
+    $include: schemas/index.yaml
+  parameters:
+    $include: parameters.yaml
+  responses:
+    $include: responses.yaml
+
+paths:
+  $include: paths/index.yaml

@@ -1,0 +1,11 @@
+OrganizationUserStatusType:
+  description: |
+    Organization user status:
+      * `0` - Invited
+      * `1` - Accepted
+      * `2` - Confirmed
+  type: integer
+  enum:
+    - 0
+    - 1
+    - 2

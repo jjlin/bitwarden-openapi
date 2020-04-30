@@ -1,0 +1,21 @@
+SelectionReadOnlyRequestModel:
+  description: Request model for setting a user's level of access to a collection.
+  type: object
+  properties:
+    Id:
+      description: UUID of the collection.
+      type: string
+      format: uuid
+    ReadOnly:
+      description: Whether entries in the collection are read-only to the user.
+      type: boolean
+    HidePasswords:
+      description: >
+        Whether the password field of entries in the collection are hidden to the user.
+        This is intended to prevent the average user from directly viewing passwords
+        or copying them to the clipboard; passwords can only be auto-filled.
+      type: boolean
+    required:
+    - Id
+    - ReadOnly
+    - HidePasswords

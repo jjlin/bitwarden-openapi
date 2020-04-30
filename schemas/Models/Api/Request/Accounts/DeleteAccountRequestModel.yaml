@@ -1,0 +1,10 @@
+DeleteAccountRequestModel:
+  description: Account deletion request.
+  type: object
+  properties:
+    MasterPasswordHash:
+      type: string
+      format: byte
+      description: Master password hash for confirmation.
+  required:
+    - MasterPasswordHash

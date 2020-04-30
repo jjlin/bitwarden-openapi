@@ -1,0 +1,14 @@
+PreloginResponseModel:
+  description: Prelogin response.
+  type: object
+  properties:
+    Kdf:
+      $ref: '#/components/schemas/KdfType'
+    KdfIterations:
+      description: >
+        Number of KDF iterations the client must apply to the master password
+        to generate the master password hash.
+      type: integer
+  required:
+    - Kdf
+    - KdfIterations

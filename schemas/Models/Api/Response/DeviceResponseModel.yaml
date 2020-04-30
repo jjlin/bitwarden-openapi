@@ -1,0 +1,31 @@
+DeviceResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Device model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`device`).
+        Id:
+          description: Device UUID
+          type: string
+          format: uuid
+        Name:
+          description: Device name
+          type: string
+        Type:
+          $ref: '#/components/schemas/DeviceType'
+        Identifier:
+          description: ???
+          type: string
+        CreationDate:
+          description: Creation date of the device entry
+          type: string
+          format: date-time
+      required:
+        - Object
+        - Id
+        - Name
+        - Type
+        - Identifier
+        - CreationDate

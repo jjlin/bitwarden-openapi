@@ -1,0 +1,20 @@
+UserKeyResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Models the public key of a user.
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`userKey`).
+        UserId:
+          description: UUID of the user.
+          type: string
+          format: uuid
+        PublicKey:
+          description: Public key of the user (Base64-encoded).
+          type: string
+          format: byte
+      required:
+        - Object
+        - UserId
+        - PublicKey

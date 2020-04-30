@@ -1,0 +1,11 @@
+FieldType:
+  description: |
+    Custom field type:
+      * `0` - Text
+      * `1` - Hidden (e.g., password data)
+      * `2` - Boolean
+  type: integer
+  enum:
+    - 0
+    - 1
+    - 2

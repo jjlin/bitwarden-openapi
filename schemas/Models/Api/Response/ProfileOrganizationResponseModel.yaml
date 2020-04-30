@@ -1,0 +1,65 @@
+ProfileOrganizationResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Organization profile
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`profileOrganization`).
+        Id:
+          description: UUID of the organization.
+          type: string
+          format: uuid
+        Name:
+          description: Name of the organization.
+          type: string
+          format: uuid
+        UsePolicies:
+          description: Whether to apply org policies
+          type: boolean
+        UseGroups:
+          description: ???
+          type: boolean
+        UseDirectory:
+          description: Whether the org is synced against an AD/LDAP directory?
+          type: boolean
+        UseEvents:
+          description: ???
+          type: boolean
+        UseTotp:
+          description: ???
+          type: boolean
+        Use2fa:
+          description: ???
+          type: boolean
+        UseApi:
+          description: ???
+          type: boolean
+        UsersGetPremium:
+          description: Whether members of the org get premium service entitlement.
+          type: boolean
+        SelfHost:
+          description: ???
+          type: boolean
+        Seats:
+          description: Max number of users allowed in the org.
+          type: integer
+        MaxCollections:
+          description: Max number of collections allowed in the org.
+          type: integer
+        MaxStorageGb:
+          description: Max attachment storage (in GB) allowed for the org.
+          type: integer
+          nullable: true
+        Key:
+          description: The (encrypted) encryption key used for the org's ciphers.
+          type: string
+        Status:
+          $ref: '#/components/schemas/OrganizationUserStatusType'
+        Type:
+          $ref: '#/components/schemas/OrganizationUserType'
+        Enabled:
+          description: Whether the org is enabled.
+          type: boolean
+      required:
+        - Object

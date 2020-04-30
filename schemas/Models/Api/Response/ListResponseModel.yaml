@@ -1,0 +1,27 @@
+ListResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Paginated list response model.
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`list`).
+        Data:
+          description: >
+            The list data. `ListResponseModel` is a generic type that can be
+            instantiated against any type that derives from `ResponseModel`.
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseModel'
+        ContinuationToken:
+          description: >
+            If this token is non-null, there is more data available,
+            and the token encodes the pagination state. To fetch the next
+            page of data, call the API again and pass this token (generally
+            via a `continuationToken` query parameter).
+          type: string
+          nullable: true
+      required:
+        - Object
+        - Data
+        - ContinuationToken

@@ -1,0 +1,130 @@
+/organizations/{orgId}/collections:
+  get:
+    tags:
+      - Collections
+    summary: Get collections owned by an organization
+    description: Get a list of all collections owned by an organization.
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization that owns the collection
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionResponseModel' #XXX ListResponse
+
+/organizations/{orgId}/collections/~/collections:
+  get:
+    tags:
+      - Collections
+    summary: ???
+    description: ???
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization that owns the collection
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionResponseModel' #XXX ListResponse
+
+/organizations/{orgId}/collections/{id}/users:
+  get:
+    tags:
+      - Collections
+    summary: ???
+    description: ???
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization that owns the collection
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the organization that owns the collection
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionResponseModel' #XXX ListResponse
+
+/organizations/{orgId}/collections/{id}:
+  get:
+    tags:
+      - Collections
+    summary: Get collection summary
+    description: Get collection summary
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization that owns the collection
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the collection
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionResponseModel'
+
+/organizations/{orgId}/collections/{id}/details:
+  get:
+    tags:
+      - Collections
+    summary: Get collection details
+    description: Get collection details
+    parameters:
+      - in: path
+        name: orgId
+        description: UUID of the organization that owns the collection
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: id
+        description: UUID of the collection
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionGroupDetailsResponseModel'

@@ -1,0 +1,31 @@
+PushSendRequestModel:
+  description: >
+    Request model for sending a mobile push notification.
+    When a cipher is created or modified, a push notification can be sent
+    to registered mobile devices so they can immediately fetch the updated
+    cipher. Either the `UserId` or `OrganizationId` field should be populated,
+    depending on whether the cipher is owned by a user or an organization.
+  type: object
+  properties:
+    UserId:
+      description: UUID of the user.
+      type: string
+      format: uuid
+    OrganizationId:
+      description: UUID of the organization.
+      type: string
+      format: uuid
+    DeviceId:
+      description: UUID of the device.
+      type: string
+      format: uuid
+    Identifier:
+      description: ???
+      type: string
+    Type:
+      $ref: '#/components/schemas/PushType'
+    Payload:
+      type: object
+  required:
+    - Type
+    - Payload

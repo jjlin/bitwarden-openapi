@@ -1,0 +1,7 @@
+KdfType:
+  description: |
+    Key Derivation Function (KDF) type:
+      * `0` - PBKDF2_SHA256  
+  type: integer
+  enum:
+    - 0

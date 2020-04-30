@@ -1,0 +1,13 @@
+CipherMiniDetailsListResponseModel:
+  description: Paginated cipher (mini) details list response model.
+  allOf:
+    - $ref: '#/components/schemas/ListResponseModel'
+    - type: object
+      properties:
+        Data:
+          description: The list of cipher details.
+          type: array
+          items:
+            $ref: '#/components/schemas/CipherMiniDetailsResponseModel'
+      required:
+        - Data

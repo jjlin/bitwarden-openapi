@@ -1,0 +1,87 @@
+/ciphers:
+  get:
+    tags:
+      - Ciphers
+    summary: Get all user ciphers
+    description: Get all user ciphers
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CipherDetailsListResponseModel'
+
+/ciphers/{id}:
+  get:
+    tags:
+      - Ciphers
+    summary: Get cipher by ID
+    description: Get cipher by ID
+    parameters:
+      - in: path
+        name: id
+        description: UUID of the cipher
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CipherResponseModel'
+  post:
+    tags:
+      - Ciphers
+    summary: Upsert cipher by ID
+    description: Upsert cipher by ID
+    parameters:
+      - in: path
+        name: id
+        description: UUID of the cipher
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CipherRequestModel'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CipherResponseModel'
+  put:
+    tags:
+      - Ciphers
+    summary: Upsert cipher by ID
+    description: Upsert cipher by ID
+    parameters:
+      - in: path
+        name: id
+        description: UUID of the cipher
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CipherRequestModel'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CipherResponseModel'

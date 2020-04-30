@@ -1,0 +1,8 @@
+CipherSecureNoteModel:
+  description: >
+    Secure note cipher model. The actual secure note data is just stored as
+    the `Notes` field of the cipher model.
+  type: object
+  properties:
+    Type:
+      $ref: '#/components/schemas/SecureNoteType'

@@ -1,0 +1,16 @@
+KeysRequestModel:
+  description: Keys associated with a user account.
+  type: object
+  properties:
+    PublicKey:
+      type: string
+      format: byte
+      nullable: true
+      description: Public key (Base64-encoded).
+    EncryptedPrivateKey:
+      type: string
+      format: byte
+      description: Private key (Base64-encoded).
+  required:
+    - PublicKey
+    - EncryptedPrivateKey

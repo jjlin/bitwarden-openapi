@@ -1,0 +1,67 @@
+/settings/domains:
+  get:
+    tags:
+      - Equivalent Domains
+    summary: Get equivalent domains settings
+    description: Get the user's equivalent domains settings.
+    parameters:
+      - in: query
+        name: excluded
+        description: >
+          Whether to include global equivalent domains entries that the user
+          has configured as excluded (disabled).
+        required: false
+        schema:
+          type: boolean
+          default: true
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainsResponseModel'
+  post:
+    tags:
+      - Equivalent Domains
+    summary: Set equivalent domains settings
+    description: >
+      Set or update the user's equivalent domains settings.
+      This includes both user-defined equivalent domains and
+      any exclusions to the list of global equivalent domains.
+      (This is a synonym for the `PUT` operation.)
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateDomainsRequestModel'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainsResponseModel'
+  put:
+    tags:
+      - Equivalent Domains
+    summary: Set equivalent domains settings
+    description: >
+      Set or update the user's equivalent domains settings.
+      This includes both user-defined equivalent domains and
+      any exclusions to the list of global equivalent domains.
+      (This is a synonym for the `POST` operation.)
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateDomainsRequestModel'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainsResponseModel'

@@ -1,0 +1,13 @@
+OrganizationUserType:
+  description: |
+    Organization user type:
+      * `0` - Owner
+      * `1` - Admin
+      * `2` - User
+      * `3` - Manager
+  type: integer
+  enum:
+    - 0
+    - 1
+    - 2
+    - 3

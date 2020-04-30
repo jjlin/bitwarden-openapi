@@ -1,0 +1,242 @@
+/accounts/prelogin:
+  post:
+    tags:
+      - Accounts
+    summary: Get prelogin parameters
+    description: Get prelogin parameters
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreloginResponseModel'
+
+/accounts/register:
+  post:
+    tags:
+      - Accounts
+    summary: Register a new account
+    description: Register a new account
+    responses:
+      '200':
+        description: Success
+
+/accounts/password-hint:
+  post:
+    tags:
+      - Accounts
+    summary: Send master password hint
+    description: Send the master password hint to the user via email.
+    responses:
+      '200':
+        description: Success
+
+/accounts/email-token:
+  post:
+    tags:
+      - Accounts
+    summary: Request verification token for changing email address
+    description: Request verification token for changing email address.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmailTokenRequestModel'
+    responses:
+      '200':
+        description: Success
+
+/accounts/email:
+  post:
+    tags:
+      - Accounts
+    summary: Change email address
+    description: Change email address
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmailRequestModel'
+    responses:
+      '200':
+        description: Success
+
+/accounts/verify-email-token:
+  post:
+    tags:
+      - Accounts
+    summary: Verify email token
+    description: Verify email token
+    responses:
+      '200':
+        description: Success
+
+/accounts/password:
+  post:
+    tags:
+      - Accounts
+    summary: Change password
+    description: Change password
+    responses:
+      '200':
+        description: Success
+
+/accounts/kdf:
+  post:
+    tags:
+      - Accounts
+    summary: Change KDF parameters
+    description: Change KDF parameters
+    responses:
+      '200':
+        description: Success
+
+/accounts/key:
+  post:
+    tags:
+      - Accounts
+    summary: Change key parameters
+    description: Change key parameters
+    responses:
+      '200':
+        description: Success
+
+/accounts/security-stamp:
+  post:
+    tags:
+      - Accounts
+    summary: Refresh security stamp
+    description: Refresh security stamp
+    responses:
+      '200':
+        description: Success
+
+/accounts/profile:
+  get:
+    tags:
+      - Accounts
+    summary: Profile
+    description: Register a new account
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileResponseModel'
+  post:
+    tags:
+      - Accounts
+    summary: Profile
+    description: Register a new account
+    responses:
+      '200':
+        description: Success
+  put:
+    tags:
+      - Accounts
+    summary: Profile
+    description: Register a new account
+    responses:
+      '200':
+        description: Success
+
+/accounts/organizations:
+  get:
+    tags:
+      - Accounts
+    summary: Organizations ???
+    description: Organizations
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProfileOrganizationResponseModel'
+
+/accounts/revision-date:
+  get:
+    tags:
+      - Accounts
+    summary: Get last revision date
+    description: >
+      Get the last revision date for user data.
+      This is used to quickly check whether a full sync is needed.
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int64
+
+/accounts/keys:
+  get:
+    tags:
+      - Accounts
+    summary: Get user keys
+    description: Get user keys
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeysResponseModel'
+  post:
+    tags:
+      - Accounts
+    summary: Profile
+    description: Set user keys
+    responses:
+      '200':
+        description: Success
+
+/accounts/delete:
+  post:
+    tags:
+      - Accounts
+    summary: Delete account
+    description: Delete account
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteAccountRequestModel'
+    responses:
+      '200':
+        description: Success
+
+/accounts/delete-recover:
+  get:
+    tags:
+      - Accounts
+    summary: Get email challenge to delete account
+    description: Get email challenge to delete account (for when the account password is no longer known).
+    responses:
+      '200':
+        description: Success
+
+/accounts/delete-recover-token:
+  post:
+    tags:
+      - Accounts
+    summary: Delete account via email challenge token
+    description: Delete account via email challenge token
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VerifyDeleteRecoverRequestModel'
+    responses:
+      '200':
+        description: Success

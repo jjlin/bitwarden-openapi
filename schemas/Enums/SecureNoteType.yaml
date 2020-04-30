@@ -1,0 +1,7 @@
+SecureNoteType:
+  description: |
+    Secure note type:
+      * `0` - Generic
+  type: integer
+  enum:
+    - 0

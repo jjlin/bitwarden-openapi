@@ -1,0 +1,137 @@
+CipherMiniResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Cipher (minimal) model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`cipherMini`).
+        Id:
+          description: Cipher UUID
+          type: string
+          format: uuid
+        OrganizationId:
+          description: Organization UUID (optional; may not belong to an org)
+          type: string
+          format: uuid
+          nullable: true
+        Type:
+          $ref: '#/components/schemas/CipherType'
+        Data:
+          description: Cipher data (value determined by `Type`).
+          discriminator:
+            propertyName: Type
+          oneOf:
+            - $ref: '#/components/schemas/CipherLoginModel'
+            - $ref: '#/components/schemas/CipherCardModel'
+            - $ref: '#/components/schemas/CipherIdentityModel'
+            - $ref: '#/components/schemas/CipherSecureNoteModel'
+        Name:
+          description: Cipher name
+          type: string
+        Notes:
+          description: Cipher notes
+          type: string
+        Login:
+          $ref: '#/components/schemas/CipherLoginModel'
+        Card:
+          $ref: '#/components/schemas/CipherCardModel'
+        Identity:
+          $ref: '#/components/schemas/CipherIdentityModel'
+        SecureNote:
+          $ref: '#/components/schemas/CipherSecureNoteModel'
+        Fields:
+          description: List of custom fields (possibly empty)
+          type: array
+          items:
+            $ref: '#/components/schemas/CipherFieldModel'
+        PasswordHistory:
+          description: List of previous passwords (possibly empty)
+          type: array
+          items:
+            $ref: '#/components/schemas/CipherPasswordHistoryModel'
+        Attachments:
+          description: List of file attachments (possibly empty)
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentResponseModel'
+        OrganizationUseTotp:
+          description: ???
+          type: boolean
+        RevisionDate:
+          description: Date the cipher was last revised
+          type: string
+          format: date-time
+        DeletedDate:
+          description: Date the cipher was soft-deleted
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - Object
+        - Id
+        - OrganizationId
+        - Name
+
+CipherResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/CipherMiniResponseModel'
+    - description: Cipher model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`cipher`).
+        FolderId:
+          description: UUID of the user folder that contains this cipher, if any
+          type: string
+          format: uuid
+          nullable: true
+        Favorite:
+          description: Whether this cipher is a favorite of the user
+          type: boolean
+        Edit:
+          description: Whether this cipher is editable by the user
+          type: boolean
+        ViewPassword:
+          description: Whether this cipher's password field can be viewed or copied by the user
+          type: boolean
+      required:
+        - Object
+        - Favorite
+        - Edit
+
+CipherDetailsResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/CipherResponseModel'
+    - description: Cipher details model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`cipherDetails`).
+        CollectionIds:
+          description: List of UUIDs of collections that contain this cipher (can be empty)
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+        - Object
+        - CollectionIds
+
+CipherMiniDetailsResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/CipherMiniResponseModel'
+    - description: Cipher (minimal) details model
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`cipherMiniDetails`).
+        CollectionIds:
+          description: List of UUIDs of collections that contain this cipher (can be empty)
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+        - Object
+        - CollectionIds

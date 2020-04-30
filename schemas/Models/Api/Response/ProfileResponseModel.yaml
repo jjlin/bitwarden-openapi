@@ -1,0 +1,52 @@
+ProfileResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: User profile
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`profile`).
+        Id:
+          description: UUID of the user's account.
+          type: string
+          format: uuid
+        Name:
+          description: User's real name.
+          type: string
+        Email:
+          description: User's email address.
+          type: string
+          format: email
+        EmailVerified:
+          description: Whether the email address has been verified.
+          type: boolean
+        Premium:
+          description: Whether the user is entitled to premium services.
+          type: boolean
+        MasterPasswordHint:
+          description: User's master password hint.
+          type: string
+        Culture:
+          description: User's language preference ([RFC 4646](https://tools.ietf.org/html/rfc4646) language tag).
+          type: string
+          default: 'en-US'
+        TwoFactorEnabled:
+          description: Whether two-factor authentication is enabled for the user's account.
+          type: boolean
+        Key:
+          description: User's public key (used for receiving org keys).
+          type: string
+        PrivateKey:
+          description: User's encrypted private key (used for decrypting org keys shared with the user).
+          type: string
+        SecurityStamp:
+          description: Security stamp ???
+          type: string
+        Organizations:
+          description: Organizations to which the user belongs.
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/ProfileOrganizationResponseModel'
+      required:
+        - Object

@@ -1,0 +1,34 @@
+SyncResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Full sync response. This contains all data associated with a user account.
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`sync`).
+        Profile:
+          $ref: '#/components/schemas/ProfileResponseModel'
+        Folders:
+          description: User folders
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderResponseModel'
+        Collections:
+          description: User collections
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionDetailsResponseModel'
+        Ciphers:
+          description: User ciphers
+          type: array
+          items:
+            $ref: '#/components/schemas/CipherDetailsResponseModel'
+        Domains:
+          $ref: '#/components/schemas/DomainsResponseModel'
+        Policies:
+          description: Organization policies to be applied to the user (or an empty list if none).
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyResponseModel'
+      required:
+        - Object

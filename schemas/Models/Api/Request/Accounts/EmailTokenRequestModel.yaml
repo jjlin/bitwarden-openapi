@@ -1,0 +1,17 @@
+EmailTokenRequestModel:
+  description: >
+    Request that a verification token be sent to a user's existing email address
+    to authorize a change of email adddress.
+  type: object
+  properties:
+    NewEmail:
+      type: string
+      format: email
+      description: New email address.
+    MasterPasswordHash:
+      type: string
+      format: byte
+      description: Master password hash.
+  required:
+    - NewEmail
+    - MasterPasswordHash

@@ -1,0 +1,57 @@
+CipherLoginModel:
+  description: Login cipher model
+  type: object
+  properties:
+    Id:
+      description: Cipher UUID
+      type: string
+      format: uuid
+    OrganizationId:
+      description: Organization UUID (optional; may not belong to an org)
+      type: string
+      format: uuid
+      nullable: true
+    Uri:
+      description: |
+        Primary URI. This is the same as the first entry in the `Uris` list,
+        and is the entry used when launching a cipher URI into a new browser
+        tab or window.
+      type: string
+      format: uri
+    Uris:
+      description: Complete list of URIs associated with the cipher
+      type: array
+      items:
+        $ref: '#/components/schemas/CipherLoginUriModel'
+    Username:
+      description: Encrypted username
+      type: string
+      nullable: true
+    Password:
+      description: Encrypted password
+      type: string
+      nullable: true
+    PasswordRevisionDate:
+      description: Date the password was last revised
+      type: string
+      format: date-time
+      nullable: true
+    Totp:
+      description: Encrypted TOTP seed data
+      type: string
+      nullable: true
+  required:
+    - Id
+
+CipherLoginUriModel:
+  description: Organization collection details model
+  type: object
+  properties:
+    Uri:
+      description: URI of this login entry
+      type: string
+      format: uri
+    Match:
+      $ref: '#/components/schemas/UriMatchType'
+  required:
+    - Uri

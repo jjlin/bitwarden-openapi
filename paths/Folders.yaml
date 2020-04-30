@@ -1,0 +1,147 @@
+/folders:
+  get:
+    tags:
+      - Folders
+    summary: Get all folders
+    description: Get all of the user's folders.
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderListResponseModel'
+  post:
+    tags:
+      - Folders
+    summary: Create a folder
+    description: Create a folder.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FolderRequestModel'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderResponseModel'
+
+/folders/{id}:
+  get:
+    tags:
+      - Folders
+    summary: Get folder by ID
+    description: Get a folder by ID.
+    parameters:
+      - in: path
+        name: id
+        description: UUID of the folder.
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderResponseModel'
+  post:
+    tags:
+      - Folders
+    summary: Update a folder by ID
+    description: >
+      Update a folder by ID.
+      (This is a synonym for the `PUT` operation.)
+    parameters:
+      - in: path
+        name: id
+        description: UUID of the folder.
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FolderRequestModel'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderResponseModel'
+  put:
+    tags:
+      - Folders
+    summary: Update a folder by ID
+    description: >
+      Update a folder by ID.
+      (This is a synonym for the `POST` operation.)
+    parameters:
+      - in: path
+        name: id
+        description: UUID of the folder.
+        required: true
+        schema:
+          type: string
+          format: uuid
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FolderRequestModel'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderResponseModel'
+  delete:
+    tags:
+      - Folders
+    summary: Delete a folder by ID
+    description: >
+      Delete a folder by ID.
+      (This is a synonym for `POST /folders/{id}/delete`.)
+    parameters:
+      - in: path
+        name: id
+        description: UUID of the folder.
+        required: true
+        schema:
+          type: string
+          format: uuid
+    responses:
+      '200':
+        description: Success
+
+/folders/{id}/delete:
+  post:
+    tags:
+      - Folders
+    summary: Delete a folder by ID
+    parameters:
+      - in: path
+        name: id
+        description: UUID of the folder.
+        required: true
+        schema:
+          type: string
+          format: uuid
+    description: >
+      Delete a folder by ID.
+      (This is a synonym for `DELETE /folders/{id}`.)
+    responses:
+      '200':
+        description: Success

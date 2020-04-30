@@ -1,0 +1,11 @@
+PolicyType:
+  description: |
+    Organization policy type:
+      * `0` - TwoFactorAuthentication
+      * `1` - MasterPassword
+      * `2` - PasswordGenerator
+  type: integer
+  enum:
+    - 0
+    - 1
+    - 2

@@ -1,0 +1,17 @@
+UriMatchType:
+  description: |
+    URI match type:
+      * `0` - Domain
+      * `1` - Host
+      * `2` - StartsWith
+      * `3` - Exact
+      * `4` - RegularExpression
+      * `5` - Never
+  type: integer
+  enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5

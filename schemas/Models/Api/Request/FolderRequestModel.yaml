@@ -1,0 +1,27 @@
+FolderRequestModel:
+  description: Request model for creating or updating a folder.
+  type: object
+  properties:
+    Name:
+      description: >
+        The encrypted name of the folder (if creating a new folder), or
+        the new encrypted name of the folder (if updating an existing folder).
+      type: string
+      format: cipher
+  required:
+    - Name
+
+FolderWithIdRequestModel:
+  allOf:
+    - $ref: '#/components/schemas/FolderRequestModel'
+    - description: >
+        Request model for creating or updating a folder, with the folder UUID
+        included in the request.
+      type: object
+      properties:
+        Id:
+          description: Folder UUID
+          type: string
+          format: uuid
+      required:
+        - Id

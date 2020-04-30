@@ -1,0 +1,28 @@
+PolicyResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Organization policy model.
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`policy`).
+        Id:
+          description: UUID of the policy.
+          type: string
+          format: uuid
+        OrganizationId:
+          description: UUID of the organization mandating this policy.
+          type: string
+          format: uuid
+        Type:
+          $ref: '#/components/schemas/PolicyType'
+        Data:
+          description: ???
+          type: object
+        Enabled:
+          description: Whether this policy is enabled and should be enforced by the client.
+          type: boolean
+      required:
+        - Object
+        - Id
+        - OrganizationId

@@ -1,0 +1,28 @@
+CipherCardModel:
+  description: Card cipher model
+  type: object
+  properties:
+    CardholderName:
+      description: Encrypted cardholder name
+      type: string
+      nullable: true
+    Brand:
+      description: Encrypted card brand
+      type: string
+      nullable: true
+    Number:
+      description: Encrypted card number
+      type: string
+      nullable: true
+    ExpMonth:
+      description: Encrypted card expiration month
+      type: string
+      nullable: true
+    ExpYear:
+      description: Encrypted card expiration year
+      type: string
+      nullable: true
+    Code:
+      description: Encrypted [card security code](https://en.wikipedia.org/wiki/Card_security_code)
+      type: string
+      nullable: true

@@ -1,0 +1,25 @@
+KeysResponseModel:
+  allOf:
+    - $ref: '#/components/schemas/ResponseModel'
+    - description: Keys associated with a user account.
+      type: object
+      properties:
+        Object:
+          description: Object type tag (`keys`).
+        Key:
+          type: string
+          format: byte
+          description: Key ???
+        PublicKey:
+          type: string
+          format: byte
+          description: Public key (Base64-encoded).
+        PrivateKey:
+          type: string
+          format: byte
+          description: Private key (Base64-encoded).
+      required:
+        - Object
+        - Key
+        - PublicKey
+        - PrivateKey
