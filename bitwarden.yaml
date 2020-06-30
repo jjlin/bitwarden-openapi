@@ -1,0 +1,2571 @@
+## --------------------
+## DON'T EDIT THIS FILE
+## --------------------
+## Engine: yamlinc@0.1.10
+## Source: main.yaml
+
+openapi: 3.0.3
+info:
+  title: Bitwarden Private API
+  description: >
+    The Bitwarden private APIs. These APIs are unversioned, and can change
+
+    without notice (occasionally in backward incompatible ways).
+
+
+    This API model is intended to cover all aspects of the Bitwarden private
+
+    APIs that may be relevant to a non-commercial third-party implementation
+
+    of the Bitwarden backend. In particular, it does not cover Bitwarden APIs
+
+    specific to licensing, billing, payments, etc.
+
+
+    The Bitwarden private APIs are a moving target; PRs to track changes in
+
+    the upstream code or to improve the accuracy/completeness of the existing
+
+    API model are welcome.
+
+
+    See also:
+
+
+    * [Bitwarden public APIs](https://bitwarden.com/help/article/public-api/)
+      ([OpenAPI docs](https://docs.bitwarden.com/api/))
+    * [Rubywarden's Bitwarden API
+    overview](https://github.com/jcs/rubywarden/blob/master/API.md)
+  version: latest
+  contact:
+    name: GitHub
+    url: 'https://github.com/jjlin/bitwarden-openapi/'
+servers:
+  - url: 'https://api.bitwarden.com/'
+components:
+  schemas:
+    CipherType:
+      description: |
+        Cipher type:
+          * `0` - Folder (deprecated)
+          * `1` - Login
+          * `2` - SecureNote
+          * `3` - Card
+          * `4` - Identity
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+    DeviceType:
+      description: |
+        Device type:
+          * `0` - Android
+          * `1` - iOS
+          * `2` - Chrome Extension
+          * `3` - Firefox Extension
+          * `4` - Opera Extension
+          * `5` - Edge Extension
+          * `6` - Windows Desktop
+          * `7` - macOS Desktop
+          * `8` - Linux Desktop
+          * `9` - Chrome Browser
+          * `10` - Firefox Browser
+          * `11` - Opera Browser
+          * `12` - Edge Browser
+          * `13` - IE Browser
+          * `14` - Unknown Browser
+          * `15` - Amazon FireOS
+          * `16` - Universal Windows Platform (UWP)
+          * `17` - Safari Browser
+          * `18` - Vivaldi Browser
+          * `19` - Vivaldi Extension
+          * `20` - Safari Extension
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+    EncryptionType:
+      description: |
+        Encryption type:
+          * `0` - AesCbc256_B64
+          * `1` - AesCbc128_HmacSha256_B64
+          * `2` - AesCbc256_HmacSha256_B64
+          * `3` - Rsa2048_OaepSha256_B64
+          * `4` - Rsa2048_OaepSha1_B64
+          * `5` - Rsa2048_OaepSha256_HmacSha256_B64
+          * `6` - Rsa2048_OaepSha1_HmacSha256_B64
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+    FieldType:
+      description: |
+        Custom field type:
+          * `0` - Text
+          * `1` - Hidden (e.g., password data)
+          * `2` - Boolean
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+    GlobalEquivalentDomainsType:
+      description: |
+        Global equivalent domains type:
+          * Google = 0
+          * Apple = 1
+          * Ameritrade = 2
+          * BoA = 3
+          * Sprint = 4
+          * WellsFargo = 5
+          * Merrill = 6
+          * Citi = 7
+          * Cnet = 8
+          * Gap = 9
+          * Microsoft = 10
+          * United = 11
+          * Yahoo = 12
+          * Zonelabs = 13
+          * PayPal = 14
+          * Avon = 15
+          * Diapers = 16
+          * Contacts = 17
+          * Amazon = 18
+          * Cox = 19
+          * Norton = 20
+          * Verizon = 21
+          * Buy = 22
+          * Sirius = 23
+          * Ea = 24
+          * Basecamp = 25
+          * Steam = 26
+          * Chart = 27
+          * Gotomeeting = 28
+          * Gogo = 29
+          * Oracle = 30
+          * Discover = 31
+          * Dcu = 32
+          * Healthcare = 33
+          * Pepco = 34
+          * Century21 = 35
+          * Comcast = 36
+          * Cricket = 37
+          * Mtb = 38
+          * Dropbox = 39
+          * Snapfish = 40
+          * Alibaba = 41
+          * Playstation = 42
+          * Mercado = 43
+          * Zendesk = 44
+          * Autodesk = 45
+          * RailNation = 46
+          * Wpcu = 47
+          * Mathletics = 48
+          * Discountbank = 49
+          * Mi = 50
+          * Facebook = 51
+          * Postepay = 52
+          * Skysports = 53
+          * Disney = 54
+          * Pokemon = 55
+          * Uv = 56
+          * Yahavo = 57
+          * Mdsol = 58
+          * Sears = 59
+          * Xiami = 60
+          * Belkin = 61
+          * Turbotax = 62
+          * Shopify = 63
+          * Ebay = 64
+          * Techdata = 65
+          * Schwab = 66
+          * Mozilla = 67 // deprecated
+          * Tesla = 68
+          * MorganStanley = 69
+          * TaxAct = 70
+          * Wikimedia = 71
+          * Airbnb = 72
+          * Eventbrite = 73
+          * StackExchange = 74
+          * Docusign = 75
+          * Envato = 76
+          * X10Hosting = 77
+          * Cisco = 78
+          * CedarFair = 79
+          * Ubiquiti = 80
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+        - 27
+        - 28
+        - 29
+        - 30
+        - 31
+        - 32
+        - 33
+        - 34
+        - 35
+        - 36
+        - 37
+        - 38
+        - 39
+        - 40
+        - 41
+        - 42
+        - 43
+        - 44
+        - 45
+        - 46
+        - 47
+        - 48
+        - 49
+        - 50
+        - 51
+        - 52
+        - 53
+        - 54
+        - 55
+        - 56
+        - 57
+        - 58
+        - 59
+        - 60
+        - 61
+        - 62
+        - 63
+        - 64
+        - 65
+        - 66
+        - 67
+        - 68
+        - 69
+        - 70
+        - 71
+        - 72
+        - 73
+        - 74
+        - 75
+        - 76
+        - 77
+        - 78
+        - 79
+        - 80
+    KdfType:
+      description: |
+        Key Derivation Function (KDF) type:
+          * `0` - PBKDF2_SHA256  
+      type: integer
+      enum:
+        - 0
+    OrganizationUserStatusType:
+      description: |
+        Organization user status:
+          * `0` - Invited
+          * `1` - Accepted
+          * `2` - Confirmed
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+    OrganizationUserType:
+      description: |
+        Organization user type:
+          * `0` - Owner
+          * `1` - Admin
+          * `2` - User
+          * `3` - Manager
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+    PolicyType:
+      description: |
+        Organization policy type:
+          * `0` - TwoFactorAuthentication
+          * `1` - MasterPassword
+          * `2` - PasswordGenerator
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+    SecureNoteType:
+      description: |
+        Secure note type:
+          * `0` - Generic
+      type: integer
+      enum:
+        - 0
+    UriMatchType:
+      description: |
+        URI match type:
+          * `0` - Domain
+          * `1` - Host
+          * `2` - StartsWith
+          * `3` - Exact
+          * `4` - RegularExpression
+          * `5` - Never
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+    CipherCardModel:
+      description: Card cipher model
+      type: object
+      properties:
+        CardholderName:
+          description: Encrypted cardholder name
+          type: string
+          nullable: true
+        Brand:
+          description: Encrypted card brand
+          type: string
+          nullable: true
+        Number:
+          description: Encrypted card number
+          type: string
+          nullable: true
+        ExpMonth:
+          description: Encrypted card expiration month
+          type: string
+          nullable: true
+        ExpYear:
+          description: Encrypted card expiration year
+          type: string
+          nullable: true
+        Code:
+          description: >-
+            Encrypted [card security
+            code](https://en.wikipedia.org/wiki/Card_security_code)
+          type: string
+          nullable: true
+    CipherFieldModel:
+      description: Custom field model
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/FieldType'
+        Name:
+          description: Encrypted custom field name
+          type: string
+        Value:
+          description: Encrypted custom field value
+          type: string
+      required:
+        - Type
+        - Name
+        - Value
+    CipherIdentityModel:
+      description: Identity cipher model
+      type: object
+      properties:
+        Title:
+          description: Encrypted title
+          type: string
+          nullable: true
+        FirstName:
+          description: Encrypted first name
+          type: string
+          nullable: true
+        MiddleName:
+          description: Encrypted middle name
+          type: string
+          nullable: true
+        LastName:
+          description: Encrypted last name
+          type: string
+          nullable: true
+        Address1:
+          description: Encrypted address (line 1)
+          type: string
+          nullable: true
+        Address2:
+          description: Encrypted address (line 2)
+          type: string
+          nullable: true
+        Address3:
+          description: Encrypted address (line 3)
+          type: string
+          nullable: true
+        City:
+          description: Encrypted city
+          type: string
+          nullable: true
+        State:
+          description: Encrypted state
+          type: string
+          nullable: true
+        PostalCode:
+          description: Encrypted postal code
+          type: string
+          nullable: true
+        Country:
+          description: Encrypted country name
+          type: string
+          nullable: true
+        Company:
+          description: Encrypted company name
+          type: string
+          nullable: true
+        Email:
+          description: Encrypted email address
+          type: string
+          nullable: true
+        Phone:
+          description: Encrypted phone number
+          type: string
+          nullable: true
+        SSN:
+          description: >-
+            Encrypted [Social Security
+            Number](https://en.wikipedia.org/wiki/Social_Security_number)
+          type: string
+          nullable: true
+        Username:
+          description: Encrypted username
+          type: string
+          nullable: true
+        PassportNumber:
+          description: Encrypted passport number
+          type: string
+          nullable: true
+        LicenseNumber:
+          description: 'Encrypted license number (e.g., driver''s license)'
+          type: string
+          nullable: true
+    CipherLoginModel:
+      description: Login cipher model
+      type: object
+      properties:
+        Id:
+          description: Cipher UUID
+          type: string
+          format: uuid
+        OrganizationId:
+          description: Organization UUID (optional; may not belong to an org)
+          type: string
+          format: uuid
+          nullable: true
+        Uri:
+          description: |
+            Primary URI. This is the same as the first entry in the `Uris` list,
+            and is the entry used when launching a cipher URI into a new browser
+            tab or window.
+          type: string
+          format: uri
+        Uris:
+          description: Complete list of URIs associated with the cipher
+          type: array
+          items:
+            $ref: '#/components/schemas/CipherLoginUriModel'
+        Username:
+          description: Encrypted username
+          type: string
+          nullable: true
+        Password:
+          description: Encrypted password
+          type: string
+          nullable: true
+        PasswordRevisionDate:
+          description: Date the password was last revised
+          type: string
+          format: date-time
+          nullable: true
+        Totp:
+          description: Encrypted TOTP seed data
+          type: string
+          nullable: true
+      required:
+        - Id
+    CipherLoginUriModel:
+      description: Organization collection details model
+      type: object
+      properties:
+        Uri:
+          description: URI of this login entry
+          type: string
+          format: uri
+        Match:
+          $ref: '#/components/schemas/UriMatchType'
+      required:
+        - Uri
+    CipherPasswordHistoryModel:
+      description: Password history model
+      type: object
+      properties:
+        Password:
+          description: Encrypted previous password.
+          type: string
+        LastUsedDate:
+          description: When this password was last used (and subsequently changed).
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - Password
+        - LastUsedDate
+    CipherSecureNoteModel:
+      description: >
+        Secure note cipher model. The actual secure note data is just stored as
+        the `Notes` field of the cipher model.
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/SecureNoteType'
+    DeleteAccountRequestModel:
+      description: Account deletion request.
+      type: object
+      properties:
+        MasterPasswordHash:
+          type: string
+          format: byte
+          description: Master password hash for confirmation.
+      required:
+        - MasterPasswordHash
+    EmailRequestModel:
+      description: >
+        Request that a verification token be sent to a user's existing email
+        address to authorize a change of email adddress.
+      type: object
+      properties:
+        NewEmail:
+          type: string
+          format: email
+          description: New email address.
+        MasterPasswordHash:
+          type: string
+          format: byte
+          description: Master password hash.
+        NewMasterPasswordHash:
+          type: string
+          format: byte
+          description: Master password hash.
+        Token:
+          type: string
+          format: byte
+          description: The verification token requested via `POST /accounts/email-token`.
+        Key:
+          type: string
+          format: byte
+          description: '???'
+      required:
+        - NewEmail
+        - MasterPasswordHash
+        - NewMasterPasswordHash
+        - Token
+        - Key
+    EmailTokenRequestModel:
+      description: >
+        Request that a verification token be sent to a user's existing email
+        address to authorize a change of email adddress.
+      type: object
+      properties:
+        NewEmail:
+          type: string
+          format: email
+          description: New email address.
+        MasterPasswordHash:
+          type: string
+          format: byte
+          description: Master password hash.
+      required:
+        - NewEmail
+        - MasterPasswordHash
+    KeysRequestModel:
+      description: Keys associated with a user account.
+      type: object
+      properties:
+        PublicKey:
+          type: string
+          format: byte
+          nullable: true
+          description: Public key (Base64-encoded).
+        EncryptedPrivateKey:
+          type: string
+          format: byte
+          description: Private key (Base64-encoded).
+      required:
+        - PublicKey
+        - EncryptedPrivateKey
+    VerifyDeleteRecoverRequestModel:
+      description: Account deletion request.
+      type: object
+      properties:
+        UserId:
+          type: string
+          description: User ID of the account to delete.
+        Token:
+          type: string
+          description: >-
+            Challenge token sent to the email address associated with the
+            account.
+      required:
+        - UserId
+        - Token
+    CipherRequestModel:
+      description: Request model for creating or updating a folder.
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/CipherType'
+        OrganizationId:
+          type: string
+        FolderId:
+          type: string
+        Favorite:
+          type: boolean
+        Name:
+          description: Encrypted name (in CipherString format).
+          type: string
+          format: cipher
+        Notes:
+          description: Cipher notes
+          type: string
+        Fields:
+          description: List of custom fields (possibly empty)
+          type: array
+          items:
+            $ref: '#/components/schemas/CipherFieldModel'
+        PasswordHistory:
+          description: List of previous passwords (possibly empty)
+          type: array
+          items:
+            $ref: '#/components/schemas/CipherPasswordHistoryModel'
+        Attachments:
+          description: (Obsolete) ???
+          type: object
+          additionalProperties:
+            type: string
+        Attachments2:
+          description: '???'
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/CipherAttachmentModel'
+        Login:
+          $ref: '#/components/schemas/CipherLoginModel'
+        Card:
+          $ref: '#/components/schemas/CipherCardModel'
+        Identity:
+          $ref: '#/components/schemas/CipherIdentityModel'
+        SecureNote:
+          $ref: '#/components/schemas/CipherSecureNoteModel'
+      required:
+        - Type
+    CipherWithIdRequestModel:
+      allOf:
+        - $ref: '#/components/schemas/CipherRequestModel'
+        - description: >
+            Request model for creating or updating a cipher, with the cipher
+            UUID included in the request.
+          type: object
+          properties:
+            Id:
+              description: Cipher UUID
+              type: string
+              format: uuid
+          required:
+            - Id
+    CipherCreateRequestModel:
+      description: Request model for creating a cipher.
+      type: object
+      properties:
+        CollectionIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        Cipher:
+          $ref: '#/components/schemas/CipherRequestModel'
+      required:
+        - Cipher
+    CipherShareRequestModel:
+      description: Request model for creating a cipher.
+      type: object
+      properties:
+        CollectionIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        Cipher:
+          $ref: '#/components/schemas/CipherRequestModel'
+      required:
+        - Cipher
+    CipherCollectionsRequestModel:
+      description: Request model for ???.
+      type: object
+      properties:
+        CollectionIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+        - CollectionIds
+    CipherBulkDeleteRequestModel:
+      description: Request model for ???.
+      type: object
+      properties:
+        Ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+        - Ids
+    CipherBulkRestoreRequestModel:
+      description: Request model for ???.
+      type: object
+      properties:
+        Ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+        - Ids
+    CipherBulkMoveRequestModel:
+      description: Request model for ???.
+      type: object
+      properties:
+        Ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        FolderId:
+          type: string
+      required:
+        - Ids
+    CipherBulkShareRequestModel:
+      description: Request model for creating a cipher.
+      type: object
+      properties:
+        CollectionIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        Ciphers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CipherWithIdRequestModel'
+      required:
+        - CollectionIds
+        - Ciphers
+    FolderRequestModel:
+      description: Request model for creating or updating a folder.
+      type: object
+      properties:
+        Name:
+          description: >
+            The encrypted name of the folder (if creating a new folder), or the
+            new encrypted name of the folder (if updating an existing folder).
+          type: string
+          format: cipher
+      required:
+        - Name
+    FolderWithIdRequestModel:
+      allOf:
+        - $ref: '#/components/schemas/FolderRequestModel'
+        - description: >
+            Request model for creating or updating a folder, with the folder
+            UUID included in the request.
+          type: object
+          properties:
+            Id:
+              description: Folder UUID
+              type: string
+              format: uuid
+          required:
+            - Id
+    PushRegistrationRequestModel:
+      description: Registration request for push notifications
+      type: object
+      properties:
+        DeviceId:
+          description: UUID of the device to receive push notifications.
+          type: string
+          format: uuid
+        PushToken:
+          description: Push token ???
+          type: string
+          format: byte
+        UserId:
+          description: UUID of the user who owns the device.
+          type: string
+          format: uuid
+        Type:
+          $ref: '#/components/schemas/DeviceType'
+        Identifier:
+          description: '???'
+          type: string
+      required:
+        - DeviceId
+        - PushToken
+        - UserId
+        - Type
+        - Identifier
+    PushSendRequestModel:
+      description: >
+        Request model for sending a mobile push notification. When a cipher is
+        created or modified, a push notification can be sent to registered
+        mobile devices so they can immediately fetch the updated cipher. Either
+        the `UserId` or `OrganizationId` field should be populated, depending on
+        whether the cipher is owned by a user or an organization.
+      type: object
+      properties:
+        UserId:
+          description: UUID of the user.
+          type: string
+          format: uuid
+        OrganizationId:
+          description: UUID of the organization.
+          type: string
+          format: uuid
+        DeviceId:
+          description: UUID of the device.
+          type: string
+          format: uuid
+        Identifier:
+          description: '???'
+          type: string
+        Type:
+          $ref: '#/components/schemas/PushType'
+        Payload:
+          type: object
+      required:
+        - Type
+        - Payload
+    PushUpdateRequestModel:
+      description: Request model for updating a push notification registration.
+      type: object
+      properties:
+        DeviceIds:
+          description: List of device UUIDs that are associated with an organization.
+          type: array
+          items:
+            type: string
+            format: uuid
+        OrganizationId:
+          description: UUID of the organization.
+          type: string
+          format: uuid
+      required:
+        - DeviceIds
+        - OrganizationId
+    SelectionReadOnlyRequestModel:
+      description: Request model for setting a user's level of access to a collection.
+      type: object
+      properties:
+        Id:
+          description: UUID of the collection.
+          type: string
+          format: uuid
+        ReadOnly:
+          description: Whether entries in the collection are read-only to the user.
+          type: boolean
+        HidePasswords:
+          description: >
+            Whether the password field of entries in the collection are hidden
+            to the user. This is intended to prevent the average user from
+            directly viewing passwords or copying them to the clipboard;
+            passwords can only be auto-filled.
+          type: boolean
+        required:
+          - Id
+          - ReadOnly
+          - HidePasswords
+    UpdateDomainsRequestModel:
+      description: Request model for updating the user's equivalent domains settings.
+      type: object
+      properties:
+        EquivalentDomains:
+          description: >
+            List of user-defined equivalent domain entries. Each entry is a list
+            of domains that share the same user credentials (e.g., `amazon.com`
+            and `amazon.co.uk`).
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        ExcludedGlobalEquivalentDomains:
+          description: >
+            List of global (Bitwarden-defined) equivalent domain entries to
+            exclude (disable).
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalEquivalentDomainsType'
+      required:
+        - EquivalentDomains
+        - ExcludedGlobalEquivalentDomains
+    AttachmentResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: File attachment model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`attachment`).
+            Id:
+              description: Attachment UUID
+              type: string
+              format: uuid
+            Url:
+              description: URL of the encrypted attachment blob
+              type: string
+              format: uri
+            Filename:
+              description: Filename of the attachment
+              type: string
+            Key:
+              description: '???'
+              type: string
+            Size:
+              description: File size of the attachment (in bytes)
+              type: string
+            SizeName:
+              description: >-
+                A human-readable representation of the file size (4.2 KB, 1.43
+                GB, etc.)
+              type: string
+          required:
+            - Object
+            - Id
+            - Url
+            - Filename
+            - Key
+            - Size
+            - SizeName
+    CipherDetailsListResponseModel:
+      description: Paginated cipher details list response model.
+      allOf:
+        - $ref: '#/components/schemas/ListResponseModel'
+        - type: object
+          properties:
+            Data:
+              description: The list of folders.
+              type: array
+              items:
+                $ref: '#/components/schemas/CipherDetailsResponseModel'
+          required:
+            - Data
+    CipherMiniDetailsListResponseModel:
+      description: Paginated cipher (mini) details list response model.
+      allOf:
+        - $ref: '#/components/schemas/ListResponseModel'
+        - type: object
+          properties:
+            Data:
+              description: The list of cipher details.
+              type: array
+              items:
+                $ref: '#/components/schemas/CipherMiniDetailsResponseModel'
+          required:
+            - Data
+    CipherMiniResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Cipher (minimal) model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`cipherMini`).
+            Id:
+              description: Cipher UUID
+              type: string
+              format: uuid
+            OrganizationId:
+              description: Organization UUID (optional; may not belong to an org)
+              type: string
+              format: uuid
+              nullable: true
+            Type:
+              $ref: '#/components/schemas/CipherType'
+            Data:
+              description: Cipher data (value determined by `Type`).
+              discriminator:
+                propertyName: Type
+              oneOf:
+                - $ref: '#/components/schemas/CipherLoginModel'
+                - $ref: '#/components/schemas/CipherCardModel'
+                - $ref: '#/components/schemas/CipherIdentityModel'
+                - $ref: '#/components/schemas/CipherSecureNoteModel'
+            Name:
+              description: Cipher name
+              type: string
+            Notes:
+              description: Cipher notes
+              type: string
+            Login:
+              $ref: '#/components/schemas/CipherLoginModel'
+            Card:
+              $ref: '#/components/schemas/CipherCardModel'
+            Identity:
+              $ref: '#/components/schemas/CipherIdentityModel'
+            SecureNote:
+              $ref: '#/components/schemas/CipherSecureNoteModel'
+            Fields:
+              description: List of custom fields (possibly empty)
+              type: array
+              items:
+                $ref: '#/components/schemas/CipherFieldModel'
+            PasswordHistory:
+              description: List of previous passwords (possibly empty)
+              type: array
+              items:
+                $ref: '#/components/schemas/CipherPasswordHistoryModel'
+            Attachments:
+              description: List of file attachments (possibly empty)
+              type: array
+              items:
+                $ref: '#/components/schemas/AttachmentResponseModel'
+            OrganizationUseTotp:
+              description: '???'
+              type: boolean
+            RevisionDate:
+              description: Date the cipher was last revised
+              type: string
+              format: date-time
+            DeletedDate:
+              description: Date the cipher was soft-deleted
+              type: string
+              format: date-time
+              nullable: true
+          required:
+            - Object
+            - Id
+            - OrganizationId
+            - Name
+    CipherResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/CipherMiniResponseModel'
+        - description: Cipher model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`cipher`).
+            FolderId:
+              description: 'UUID of the user folder that contains this cipher, if any'
+              type: string
+              format: uuid
+              nullable: true
+            Favorite:
+              description: Whether this cipher is a favorite of the user
+              type: boolean
+            Edit:
+              description: Whether this cipher is editable by the user
+              type: boolean
+            ViewPassword:
+              description: >-
+                Whether this cipher's password field can be viewed or copied by
+                the user
+              type: boolean
+          required:
+            - Object
+            - Favorite
+            - Edit
+    CipherDetailsResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/CipherResponseModel'
+        - description: Cipher details model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`cipherDetails`).
+            CollectionIds:
+              description: >-
+                List of UUIDs of collections that contain this cipher (can be
+                empty)
+              type: array
+              items:
+                type: string
+                format: uuid
+          required:
+            - Object
+            - CollectionIds
+    CipherMiniDetailsResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/CipherMiniResponseModel'
+        - description: Cipher (minimal) details model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`cipherMiniDetails`).
+            CollectionIds:
+              description: >-
+                List of UUIDs of collections that contain this cipher (can be
+                empty)
+              type: array
+              items:
+                type: string
+                format: uuid
+          required:
+            - Object
+            - CollectionIds
+    CollectionResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Organization collection model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`collection`).
+            Id:
+              description: Collection UUID
+              type: string
+              format: uuid
+            OrganizationId:
+              description: Organization UUID
+              type: string
+              format: uuid
+            Name:
+              description: Collection name
+              type: string
+            ExternalId:
+              description: Collection external ID
+              type: string
+              nullable: true
+          required:
+            - Object
+            - Id
+            - OrganizationId
+            - Name
+    CollectionDetailsResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/CollectionResponseModel'
+        - description: Organization collection details model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`collectionDetails`).
+            ReadOnly:
+              description: |
+                Whether entries in the collection are read-only to the user
+              type: boolean
+            HidePasswords:
+              description: >
+                Whether the password field of entries in the collection are
+                hidden to the user
+              type: boolean
+          required:
+            - Object
+            - ReadOnly
+            - HidePasswords
+    CollectionGroupDetailsResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/CollectionResponseModel'
+        - description: Organization collection details model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`collectionGroupDetails`).
+            Groups:
+              description: Collection groups ???
+              type: array
+              items:
+                $ref: '#/components/schemas/SelectionReadOnlyResponseModel'
+          required:
+            - Object
+            - Groups
+    DeviceResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Device model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`device`).
+            Id:
+              description: Device UUID
+              type: string
+              format: uuid
+            Name:
+              description: Device name
+              type: string
+            Type:
+              $ref: '#/components/schemas/DeviceType'
+            Identifier:
+              description: '???'
+              type: string
+            CreationDate:
+              description: Creation date of the device entry
+              type: string
+              format: date-time
+          required:
+            - Object
+            - Id
+            - Name
+            - Type
+            - Identifier
+            - CreationDate
+    DomainsResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Equivalent domains model.
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`domains`).
+            EquivalentDomains:
+              description: >
+                List of user-defined equivalent domain entries. Each entry is a
+                list of domains that share the same user credentials (e.g.,
+                `amazon.com` and `amazon.co.uk`).
+              type: array
+              items:
+                type: array
+                items:
+                  type: string
+            GlobalEquivalentDomains:
+              description: |
+                List of global (Bitwarden-defined) equivalent domain entries.
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalDomains'
+          required:
+            - Object
+            - EquivalentDomains
+            - GlobalEquivalentDomains
+    GlobalDomains:
+      description: Equivalent domains model.
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/GlobalEquivalentDomainsType'
+        Domains:
+          description: List of equivalent domains for this entry.
+          type: array
+          items:
+            type: string
+        Excluded:
+          description: Whether the user has marked this entry as excluded (disabled).
+          type: boolean
+      required:
+        - Type
+        - Domains
+        - Excluded
+    FolderListResponseModel:
+      description: Paginated folder list response model.
+      allOf:
+        - $ref: '#/components/schemas/ListResponseModel'
+        - type: object
+          properties:
+            Data:
+              description: The list of folders.
+              type: array
+              items:
+                $ref: '#/components/schemas/FolderResponseModel'
+          required:
+            - Data
+    FolderResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Folder model
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`folder`).
+            Id:
+              description: Folder UUID
+              type: string
+              format: uuid
+            Name:
+              description: Folder name (as a CipherString)
+              type: string
+              format: cipher
+            RevisionDate:
+              description: Folder revision date-time (RFC 3339)
+              type: string
+              format: date-time
+          required:
+            - Object
+            - Id
+            - Name
+            - RevisionDate
+    KeysResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Keys associated with a user account.
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`keys`).
+            Key:
+              type: string
+              format: byte
+              description: Key ???
+            PublicKey:
+              type: string
+              format: byte
+              description: Public key (Base64-encoded).
+            PrivateKey:
+              type: string
+              format: byte
+              description: Private key (Base64-encoded).
+          required:
+            - Object
+            - Key
+            - PublicKey
+            - PrivateKey
+    ListResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Paginated list response model.
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`list`).
+            Data:
+              description: >
+                The list data. `ListResponseModel` is a generic type that can be
+                instantiated against any type that derives from `ResponseModel`.
+              type: array
+              items:
+                $ref: '#/components/schemas/ResponseModel'
+            ContinuationToken:
+              description: >
+                If this token is non-null, there is more data available, and the
+                token encodes the pagination state. To fetch the next page of
+                data, call the API again and pass this token (generally via a
+                `continuationToken` query parameter).
+              type: string
+              nullable: true
+          required:
+            - Object
+            - Data
+            - ContinuationToken
+    PolicyResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Organization policy model.
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`policy`).
+            Id:
+              description: UUID of the policy.
+              type: string
+              format: uuid
+            OrganizationId:
+              description: UUID of the organization mandating this policy.
+              type: string
+              format: uuid
+            Type:
+              $ref: '#/components/schemas/PolicyType'
+            Data:
+              description: '???'
+              type: object
+            Enabled:
+              description: >-
+                Whether this policy is enabled and should be enforced by the
+                client.
+              type: boolean
+          required:
+            - Object
+            - Id
+            - OrganizationId
+    PreloginResponseModel:
+      description: Prelogin response.
+      type: object
+      properties:
+        Kdf:
+          $ref: '#/components/schemas/KdfType'
+        KdfIterations:
+          description: >
+            Number of KDF iterations the client must apply to the master
+            password to generate the master password hash.
+          type: integer
+      required:
+        - Kdf
+        - KdfIterations
+    ProfileOrganizationResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Organization profile
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`profileOrganization`).
+            Id:
+              description: UUID of the organization.
+              type: string
+              format: uuid
+            Name:
+              description: Name of the organization.
+              type: string
+              format: uuid
+            UsePolicies:
+              description: Whether to apply org policies
+              type: boolean
+            UseGroups:
+              description: '???'
+              type: boolean
+            UseDirectory:
+              description: Whether the org is synced against an AD/LDAP directory?
+              type: boolean
+            UseEvents:
+              description: '???'
+              type: boolean
+            UseTotp:
+              description: '???'
+              type: boolean
+            Use2fa:
+              description: '???'
+              type: boolean
+            UseApi:
+              description: '???'
+              type: boolean
+            UsersGetPremium:
+              description: Whether members of the org get premium service entitlement.
+              type: boolean
+            SelfHost:
+              description: '???'
+              type: boolean
+            Seats:
+              description: Max number of users allowed in the org.
+              type: integer
+            MaxCollections:
+              description: Max number of collections allowed in the org.
+              type: integer
+            MaxStorageGb:
+              description: Max attachment storage (in GB) allowed for the org.
+              type: integer
+              nullable: true
+            Key:
+              description: The (encrypted) encryption key used for the org's ciphers.
+              type: string
+            Status:
+              $ref: '#/components/schemas/OrganizationUserStatusType'
+            Type:
+              $ref: '#/components/schemas/OrganizationUserType'
+            Enabled:
+              description: Whether the org is enabled.
+              type: boolean
+          required:
+            - Object
+    ProfileResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: User profile
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`profile`).
+            Id:
+              description: UUID of the user's account.
+              type: string
+              format: uuid
+            Name:
+              description: User's real name.
+              type: string
+            Email:
+              description: User's email address.
+              type: string
+              format: email
+            EmailVerified:
+              description: Whether the email address has been verified.
+              type: boolean
+            Premium:
+              description: Whether the user is entitled to premium services.
+              type: boolean
+            MasterPasswordHint:
+              description: User's master password hint.
+              type: string
+            Culture:
+              description: >-
+                User's language preference ([RFC
+                4646](https://tools.ietf.org/html/rfc4646) language tag).
+              type: string
+              default: en-US
+            TwoFactorEnabled:
+              description: >-
+                Whether two-factor authentication is enabled for the user's
+                account.
+              type: boolean
+            Key:
+              description: User's public key (used for receiving org keys).
+              type: string
+            PrivateKey:
+              description: >-
+                User's encrypted private key (used for decrypting org keys
+                shared with the user).
+              type: string
+            SecurityStamp:
+              description: Security stamp ???
+              type: string
+            Organizations:
+              description: Organizations to which the user belongs.
+              type: array
+              items:
+                type: object
+                $ref: '#/components/schemas/ProfileOrganizationResponseModel'
+          required:
+            - Object
+    ResponseModel:
+      type: object
+      description: >
+        Base model for API responses. Almost all API responses inherit from this
+        model, setting the `Object` property to a response-specific type tag.
+      discriminator:
+        propertyName: Object
+      properties:
+        Object:
+          type: string
+          readOnly: true
+          description: Object type tag.
+      required:
+        - Object
+    SelectionReadOnlyResponseModel:
+      description: Response model for getting a user's level of access to a collection.
+      type: object
+      properties:
+        Id:
+          description: UUID of the collection.
+          type: string
+          format: uuid
+        ReadOnly:
+          description: Whether entries in the collection are read-only to the user.
+          type: boolean
+        HidePasswords:
+          description: >
+            Whether the password field of entries in the collection are hidden
+            to the user. This is intended to prevent the average user from
+            directly viewing passwords or copying them to the clipboard;
+            passwords can only be auto-filled.
+          type: boolean
+      required:
+        - Id
+        - ReadOnly
+        - HidePasswords
+    SyncResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: >-
+            Full sync response. This contains all data associated with a user
+            account.
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`sync`).
+            Profile:
+              $ref: '#/components/schemas/ProfileResponseModel'
+            Folders:
+              description: User folders
+              type: array
+              items:
+                $ref: '#/components/schemas/FolderResponseModel'
+            Collections:
+              description: User collections
+              type: array
+              items:
+                $ref: '#/components/schemas/CollectionDetailsResponseModel'
+            Ciphers:
+              description: User ciphers
+              type: array
+              items:
+                $ref: '#/components/schemas/CipherDetailsResponseModel'
+            Domains:
+              $ref: '#/components/schemas/DomainsResponseModel'
+            Policies:
+              description: >-
+                Organization policies to be applied to the user (or an empty
+                list if none).
+              type: array
+              items:
+                $ref: '#/components/schemas/PolicyResponseModel'
+          required:
+            - Object
+    UserKeyResponseModel:
+      allOf:
+        - $ref: '#/components/schemas/ResponseModel'
+        - description: Models the public key of a user.
+          type: object
+          properties:
+            Object:
+              description: Object type tag (`userKey`).
+            UserId:
+              description: UUID of the user.
+              type: string
+              format: uuid
+            PublicKey:
+              description: Public key of the user (Base64-encoded).
+              type: string
+              format: byte
+          required:
+            - Object
+            - UserId
+            - PublicKey
+    CipherString:
+      type: string
+      description: |
+        The encrypted string format used in Bitwarden ciphers.
+        The basic format is `<EncryptionType>.<CipherText>[|<IV>][|<MAC?]`.
+
+        `<EncryptionType>` and `<CipherText>` (the actual encrypted data) are
+        always present, while the presence of the `<IV>` and `<MAC>` fields
+        depends on the `<EncryptionType>`.
+
+        `<EncryptionType>`
+  parameters: {}
+  responses:
+    Forbidden:
+      description: This user is forbidden to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: This user is not authorized to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    default:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+paths:
+  /accounts/prelogin:
+    post:
+      tags:
+        - Accounts
+      summary: Get prelogin parameters
+      description: Get prelogin parameters
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreloginResponseModel'
+  /accounts/register:
+    post:
+      tags:
+        - Accounts
+      summary: Register a new account
+      description: Register a new account
+      responses:
+        '200':
+          description: Success
+  /accounts/password-hint:
+    post:
+      tags:
+        - Accounts
+      summary: Send master password hint
+      description: Send the master password hint to the user via email.
+      responses:
+        '200':
+          description: Success
+  /accounts/email-token:
+    post:
+      tags:
+        - Accounts
+      summary: Request verification token for changing email address
+      description: Request verification token for changing email address.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailTokenRequestModel'
+      responses:
+        '200':
+          description: Success
+  /accounts/email:
+    post:
+      tags:
+        - Accounts
+      summary: Change email address
+      description: Change email address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailRequestModel'
+      responses:
+        '200':
+          description: Success
+  /accounts/verify-email-token:
+    post:
+      tags:
+        - Accounts
+      summary: Verify email token
+      description: Verify email token
+      responses:
+        '200':
+          description: Success
+  /accounts/password:
+    post:
+      tags:
+        - Accounts
+      summary: Change password
+      description: Change password
+      responses:
+        '200':
+          description: Success
+  /accounts/kdf:
+    post:
+      tags:
+        - Accounts
+      summary: Change KDF parameters
+      description: Change KDF parameters
+      responses:
+        '200':
+          description: Success
+  /accounts/key:
+    post:
+      tags:
+        - Accounts
+      summary: Change key parameters
+      description: Change key parameters
+      responses:
+        '200':
+          description: Success
+  /accounts/security-stamp:
+    post:
+      tags:
+        - Accounts
+      summary: Refresh security stamp
+      description: Refresh security stamp
+      responses:
+        '200':
+          description: Success
+  /accounts/profile:
+    get:
+      tags:
+        - Accounts
+      summary: Profile
+      description: Register a new account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponseModel'
+    post:
+      tags:
+        - Accounts
+      summary: Profile
+      description: Register a new account
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+        - Accounts
+      summary: Profile
+      description: Register a new account
+      responses:
+        '200':
+          description: Success
+  /accounts/organizations:
+    get:
+      tags:
+        - Accounts
+      summary: Organizations ???
+      description: Organizations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProfileOrganizationResponseModel'
+  /accounts/revision-date:
+    get:
+      tags:
+        - Accounts
+      summary: Get last revision date
+      description: >
+        Get the last revision date for user data. This is used to quickly check
+        whether a full sync is needed.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+  /accounts/keys:
+    get:
+      tags:
+        - Accounts
+      summary: Get user keys
+      description: Get user keys
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeysResponseModel'
+    post:
+      tags:
+        - Accounts
+      summary: Profile
+      description: Set user keys
+      responses:
+        '200':
+          description: Success
+  /accounts/delete:
+    post:
+      tags:
+        - Accounts
+      summary: Delete account
+      description: Delete account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAccountRequestModel'
+      responses:
+        '200':
+          description: Success
+  /accounts/delete-recover:
+    get:
+      tags:
+        - Accounts
+      summary: Get email challenge to delete account
+      description: >-
+        Get email challenge to delete account (for when the account password is
+        no longer known).
+      responses:
+        '200':
+          description: Success
+  /accounts/delete-recover-token:
+    post:
+      tags:
+        - Accounts
+      summary: Delete account via email challenge token
+      description: Delete account via email challenge token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyDeleteRecoverRequestModel'
+      responses:
+        '200':
+          description: Success
+  /ciphers:
+    get:
+      tags:
+        - Ciphers
+      summary: Get all user ciphers
+      description: Get all user ciphers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CipherDetailsListResponseModel'
+  '/ciphers/{id}':
+    get:
+      tags:
+        - Ciphers
+      summary: Get cipher by ID
+      description: Get cipher by ID
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the cipher
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CipherResponseModel'
+    post:
+      tags:
+        - Ciphers
+      summary: Upsert cipher by ID
+      description: Upsert cipher by ID
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the cipher
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CipherRequestModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CipherResponseModel'
+    put:
+      tags:
+        - Ciphers
+      summary: Upsert cipher by ID
+      description: Upsert cipher by ID
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the cipher
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CipherRequestModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CipherResponseModel'
+  '/organizations/{orgId}/collections':
+    get:
+      tags:
+        - Collections
+      summary: Get collections owned by an organization
+      description: Get a list of all collections owned by an organization.
+      parameters:
+        - in: path
+          name: orgId
+          description: UUID of the organization that owns the collection
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponseModel'
+  '/organizations/{orgId}/collections/~/collections':
+    get:
+      tags:
+        - Collections
+      summary: '???'
+      description: '???'
+      parameters:
+        - in: path
+          name: orgId
+          description: UUID of the organization that owns the collection
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponseModel'
+  '/organizations/{orgId}/collections/{id}/users':
+    get:
+      tags:
+        - Collections
+      summary: '???'
+      description: '???'
+      parameters:
+        - in: path
+          name: orgId
+          description: UUID of the organization that owns the collection
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: id
+          description: UUID of the organization that owns the collection
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponseModel'
+  '/organizations/{orgId}/collections/{id}':
+    get:
+      tags:
+        - Collections
+      summary: Get collection summary
+      description: Get collection summary
+      parameters:
+        - in: path
+          name: orgId
+          description: UUID of the organization that owns the collection
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: id
+          description: UUID of the collection
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponseModel'
+  '/organizations/{orgId}/collections/{id}/details':
+    get:
+      tags:
+        - Collections
+      summary: Get collection details
+      description: Get collection details
+      parameters:
+        - in: path
+          name: orgId
+          description: UUID of the organization that owns the collection
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: id
+          description: UUID of the collection
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionGroupDetailsResponseModel'
+  /devices:
+    get:
+      tags:
+        - Devices
+      summary: Get devices
+      description: Get devices
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceResponseModel'
+  '/devices/{id}':
+    get:
+      tags:
+        - Devices
+      summary: Get device details
+      description: Get device details
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the device
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceResponseModel'
+    delete:
+      tags:
+        - Devices
+      summary: Delete device
+      description: Delete device
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the device
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  '/devices/{id}/delete':
+    post:
+      tags:
+        - Devices
+      summary: Delete device
+      description: 'Deletes a device (synonym for `DELETE /devices/{id}`).'
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the device
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  '/devices/{id}/identifier/{identifier}':
+    get:
+      tags:
+        - Devices
+      summary: Get device identifier
+      description: Get device identifier
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the device
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: identifier
+          description: Identifier of the device
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionGroupDetailsResponseModel'
+  /folders:
+    get:
+      tags:
+        - Folders
+      summary: Get all folders
+      description: Get all of the user's folders.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderListResponseModel'
+    post:
+      tags:
+        - Folders
+      summary: Create a folder
+      description: Create a folder.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderRequestModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponseModel'
+  '/folders/{id}':
+    get:
+      tags:
+        - Folders
+      summary: Get folder by ID
+      description: Get a folder by ID.
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the folder.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponseModel'
+    post:
+      tags:
+        - Folders
+      summary: Update a folder by ID
+      description: |
+        Update a folder by ID. (This is a synonym for the `PUT` operation.)
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the folder.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderRequestModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponseModel'
+    put:
+      tags:
+        - Folders
+      summary: Update a folder by ID
+      description: |
+        Update a folder by ID. (This is a synonym for the `POST` operation.)
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the folder.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderRequestModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderResponseModel'
+    delete:
+      tags:
+        - Folders
+      summary: Delete a folder by ID
+      description: >
+        Delete a folder by ID. (This is a synonym for `POST
+        /folders/{id}/delete`.)
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the folder.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  '/folders/{id}/delete':
+    post:
+      tags:
+        - Folders
+      summary: Delete a folder by ID
+      parameters:
+        - in: path
+          name: id
+          description: UUID of the folder.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      description: |
+        Delete a folder by ID. (This is a synonym for `DELETE /folders/{id}`.)
+      responses:
+        '200':
+          description: Success
+  /notifications/hub:
+    get:
+      tags:
+        - Notifications
+      summary: Negotiate WebSocket notifications
+      description: Negotiate WebSocket notifications
+      parameters:
+        - in: query
+          name: access_token
+          description: |
+            JWT auth token. This is passed via the `Authorization` header in
+            other API requests, but Bitwarden implements WebSocket
+            notifications via [SignalR](http://signalr.net), which apparently
+            does things differently.
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: id
+          description: Unknown identifier (deprecated)
+          required: false
+          schema:
+            type: string
+      responses:
+        '101':
+          description: Switching Protocols to WebSocket
+  /push/register:
+    post:
+      tags:
+        - Notifications
+      summary: Register for push notifications
+      description: Register for push notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushRegistrationRequestModel'
+      responses:
+        '200':
+          description: Success
+  '/push/{id}':
+    delete:
+      tags:
+        - Notifications
+      summary: Delete push notification registration
+      description: Delete push notification registration
+      responses:
+        '200':
+          description: Success
+  /push/add-organization:
+    put:
+      tags:
+        - Notifications
+      summary: Add organization to push registration
+      description: Add organization to push registration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushUpdateRequestModel'
+      responses:
+        '200':
+          description: Success
+  /push/delete-organization:
+    put:
+      tags:
+        - Notifications
+      summary: Delete organization from push registration
+      description: Delete organization from push registration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushUpdateRequestModel'
+      responses:
+        '200':
+          description: Success
+  /push/send:
+    post:
+      tags:
+        - Notifications
+      summary: null
+      description: null
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushUpdateRequestModel'
+      responses:
+        '200':
+          description: Success
+  /settings/domains:
+    get:
+      tags:
+        - Equivalent Domains
+      summary: Get equivalent domains settings
+      description: Get the user's equivalent domains settings.
+      parameters:
+        - in: query
+          name: excluded
+          description: >
+            Whether to include global equivalent domains entries that the user
+            has configured as excluded (disabled).
+          required: false
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainsResponseModel'
+    post:
+      tags:
+        - Equivalent Domains
+      summary: Set equivalent domains settings
+      description: >
+        Set or update the user's equivalent domains settings. This includes both
+        user-defined equivalent domains and any exclusions to the list of global
+        equivalent domains. (This is a synonym for the `PUT` operation.)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDomainsRequestModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainsResponseModel'
+    put:
+      tags:
+        - Equivalent Domains
+      summary: Set equivalent domains settings
+      description: >
+        Set or update the user's equivalent domains settings. This includes both
+        user-defined equivalent domains and any exclusions to the list of global
+        equivalent domains. (This is a synonym for the `POST` operation.)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDomainsRequestModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainsResponseModel'
+  /sync:
+    get:
+      tags:
+        - Sync
+      summary: Sync user data
+      description: Sync user data
+      parameters:
+        - in: query
+          name: excludeDomains
+          description: >
+            Whether to omit data for the `Domains` field; if so, the field will
+            be present, but set to `null`.
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponseModel'
+  '/users/{uuid}/public-key':
+    get:
+      tags:
+        - Users
+      summary: Get user public key
+      description: Get user public key
+      parameters:
+        - in: path
+          name: uuid
+          description: UUID of the user
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserKeyResponseModel'
